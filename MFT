@@ -1,0 +1,35 @@
+#include <stdio.h>
+int main() {
+ int ms, bs, nob, ef, n, mp[10], tif = 0;
+ int i, p = 0;
+ printf("Enter the total memory available (in Bytes): ");
+ scanf("%d", &ms);
+ printf("Enter the block size (in Bytes): ");
+ scanf("%d", &bs);
+ nob = ms / bs;
+ ef = ms - nob * bs;
+ printf("\nEnter the number of processes: ");
+ scanf("%d", &n);
+ printf("\nNo. of Blocks available in memory: %d\n", nob);
+ printf("\nPROCESS\tMEMORY REQUIRED\tALLOCATED\tINTERNAL
+FRAGMENTATION\n");
+ for (i = 0; i < n && p < nob; i++) {
+ printf("%d\t\t%d", i + 1, mp[i]);
+ if (mp[i] > bs) {
+ printf("\t\tNO\t\t---");
+ } else {
+ printf("\t\tYES\t%d", bs - mp[i]);
+ tif = tif + bs - mp[i];
+ p++;
+ }
+ printf("\n");
+ }
+ if (i < n) {
+ printf("Memory is Full, Remaining Processes cannot be accommodated\n");
+ }
+Page | 39
+ADITYA ENGINEERING COLLEGE OPERATING SYSTEMS AND LINUX LAB
+ printf("\nTotal Internal Fragmentation is %d\n", tif);
+ printf("Total External Fragmentation is %d\n", ef);
+ return 0;
+}
